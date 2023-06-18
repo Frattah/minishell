@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frmonfre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -14,50 +14,49 @@
 
 char	*find_env_var(char **envp, char *var)
 {
+	size_t	ln;
+
+	ln = ft_strlen(var, '\0');
 	if (var == NULL)
 		return (NULL);
 	while (*envp)
 	{
-		if (!ft_strncmp(*envp, "PATH", 4))
-			return (*envp);
+		if (!ft_strncmp(*envp, var, ln)
+			&& (*envp)[ln] == '=')
+			return ((*envp) + ln + 1);
 		envp++;
 	}
 	return (NULL);
 }
 
-char	*find_exec(char **src, char *cmd)
+void	*expand(char **args, char **en)
 {
-	ft_strlcpy(*src, *src + 5, ft_strlen(*src, '\0'));
-	while (*src)
+	char	*tmp;
+
+	while (*args)
 	{
-		*src = ft_strconc(*src, ft_strdup("/"));
-		*src = ft_strconc(*src, ft_strdup(cmd));
-		if (!access(*src, 1))
-			return (*src);
-		src++;
+		if ((*args)[0] == '$')
+		{
+			tmp = find_env_var(en, (*args) + 1);
+			if (tmp != NULL)
+			{
+				free(*args);
+				*args = malloc(sizeof(char)
+						* ft_strlen(tmp, '\0'));
+				ft_strlcpy(*args, tmp, ft_strlen(tmp, '\0')
+					+ 1);
+			}
+		}
+		args++;
 	}
-	return (NULL);
 }
 
-void	exec(char *cmd, char **envp)
+char	*delimit_env(char *s)
 {
-	char	*path;
-	char	**src;
-	char	**args;
+	int	i;
 
-	args = ft_split(cmd, ' ');
-	if (!isin(cmd, '/'))
-	{
-		path = find_env_var(envp, "PATH");
-		src = ft_split(path, ':');
-		path = find_exec(src, args[0]);
-	}
-	else
-		path = args[0];
-	if (path != NULL)
-	{
-		execve(path, args, envp);
-		free(path);
-	}
-	free_char_sstar(src);
+	i = 0;
+	while (s[i] && !((s[i] >= 9 && s[i] <= 13 || s[i] == ' ')))
+		i++;
+	return (s + i);
 }

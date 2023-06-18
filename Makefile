@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	=	minishell.c execution.c str_utils1.c str_utils2.c free_error.c
+SRCS	=
 
 OBJS	=	$(SRCS:.c=.o)
 

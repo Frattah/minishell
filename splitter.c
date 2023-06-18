@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_utils1.c                                       :+:      :+:    :+:   */
+/*   splitter.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frmonfre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-size_t	cntword(char const *s, char c)
+size_t	cntword(char const *s)
 {
 	size_t	i;
 	size_t	w;
@@ -23,56 +23,64 @@ size_t	cntword(char const *s, char c)
 		return (0);
 	while (s[i])
 	{
-		while (s[i] && s[i] != c)
+		while (s[i] && !(s[i] >= 9 && s[i] <= 13 || s[i] == ' '))
 			i++;
-		while (s[i] && s[i] == c)
+		while (s[i] && (s[i] >= 9 && s[i] <= 13 || s[i] == ' '))
 		{
-			if (i != 0 && s[i - 1] != c)
+			if (i != 0 && !(s[i - 1] >= 9 && s[i - 1] <= 13 || s[i - 1] == ' '))
 				w++;
 			i++;
 		}
 	}
-	if (s[i - 1] != '\0' && s[i - 1] != c)
+	if (s[i - 1] != '\0'
+		&& !(s[i - 1] >= 9 && s[i - 1] <= 13 || s[i - 1] == ' '))
 		w++;
 	return (w);
 }
 
-int	isin(char *s, char c)
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	int	i;
+	size_t	i;
 
-	i = -1;
-	while (s[++i])
-		if (s[i] == c)
-			return (1);
-	return (0);
+	i = 0;
+	if (dstsize > 0)
+	{
+		while (src[i] && i < (dstsize - 1))
+		{
+			dst[i] = src[i];
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (ft_strlen(src, '\0'));
 }
 
-char	*skpstr(char *s, char c)
+char	*skpstr(char *s)
 {
-	while (*s && *s == c)
+	while (*s && (*s >= 9 && *s <= 13 || *s == ' '))
 		s++;
 	return (s);
 }
 
-size_t	ft_strlen(const char *s, char c)
+size_t	word_len(const char *s)
 {
 	size_t	ln;
 
 	ln = 0;
-	while (s[ln] && s[ln] != c)
+	while (s[ln]
+		&& !(s[ln] >= 9 && s[ln] <= 13 || s[ln] == ' '))
 		ln++;
 	return (ln);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char const *s)
 {
 	char	**split;
 	size_t	words;
 	char	*s_cpy;
 	size_t	len;
 
-	words = cntword(s, c);
+	words = cntword(s);
 	split = (char **) malloc(sizeof(char *) * (words + 1));
 	if (split == NULL)
 		return (NULL);
@@ -80,13 +88,13 @@ char	**ft_split(char const *s, char c)
 	split[words] = NULL;
 	while (s != NULL && *s != 0 && words--)
 	{
-		s_cpy = skpstr(s_cpy, c);
-		len = ft_strlen(s_cpy, c);
+		s_cpy = skpstr(s_cpy);
+		len = word_len(s_cpy);
 		*split = (char *) malloc(sizeof(char) * (len + 1));
 		if (*split == NULL)
 			return (NULL);
 		ft_strlcpy(*split++, s_cpy, len + 1);
 		s_cpy += len;
 	}
-	return (split - cntword(s, c));
+	return (split - cntword(s));
 }

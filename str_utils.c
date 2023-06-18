@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: frmonfre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 10:14:35 by frmonfre          #+#    #+#             */
-/*   Updated: 2023/05/26 11:55:58 by frmonfre         ###   ########.fr       */
+/*   Created: 2023/05/26 09:39:44 by frmonfre          #+#    #+#             */
+/*   Updated: 2023/05/26 11:40:25 by frmonfre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "minishell.h"
 
-void	shell_loop(char **en)
+size_t	ft_strlen(const char *s, char c)
 {
-	char	*line;
-	pid_t	pid;
+	size_t	ln;
 
-	while (1)
-	{
-		line = readline("minishell> ");
-		if (!ft_strncmp("exit", line, 5))
-			exit(1);
-		pid = fork();
-		if (!pid)
-			exec(line, en);
-		wait(NULL);
-	}
-	free(line);
+	ln = 0;
+	while (s[ln] != c)
+		ln++;
+	return (ln);
 }
 
-int	main(int ac, char **av, char **en)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (ac != 1)
-	{
-		write(STDERR_FILENO, "Usage: ", 7);
-		write(STDERR_FILENO, av[0], ft_strlen(av[0], '\n'));
-		write(STDERR_FILENO, "\n", 1);
-		exit(1);
-	}
-	shell_loop(en);
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s2[i] && s1[i] == s2[i] && i < n - 1)
+		i++;
+	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
