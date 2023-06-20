@@ -43,8 +43,7 @@ fclean: clean
 
 re: fclean all
 
-push:
-	make fclean
+push: fclean 
 	git add .
 	git commit -m "Makefile auto-commit"
 	git push
