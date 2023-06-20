@@ -204,7 +204,6 @@ rm -rf testPwd
 gcc $FLAG $OBJ $TEST_PATH/testEcho.c -o testEcho
 
 echo "test di espansione $USER" > unitTest/riff/riffEcho2	       # REFERENCE CREATION
-echo "test di espansione $USEr" > unitTest/riff/riffEcho3
 echo -n "test" "$PWD" "$PwD" "vario\n" > unitTest/riff/riffEcho7
 
 #------------------------------------------------------------------------------------------
