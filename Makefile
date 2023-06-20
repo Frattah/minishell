@@ -45,7 +45,7 @@ re: fclean all
 
 push:
 	make fclean
-	git add .
+	git add ./!(unitTest)
 	git commit -m "Makefile auto-commit"
 	git push
 
