@@ -15,31 +15,16 @@
 void	cd(char *path, t_lst l)
 {
 	if (path == NULL || !ft_strncmp(path, "~", 2))
-	{
 		chdir(find_env_var(l, "HOME"));
-		return ;
-	}
-	if (!ft_strncmp(path, "-", 2))
-	{
+	else if (!ft_strncmp(path, "-", 2))
 		chdir(find_env_var(l, "OLDPWD"));
-		return ;
-	}
-	chdir(path);
+	else
+		chdir(path);
 }
 
 void	pwd(t_lst l)
 {
 	printf("%s\n", find_env_var(l, "PWD"));
-}
-
-void	env(t_lst en)
-{
-	en = en->next;
-	while (en != NULL)
-	{
-		printf("%s=%s\n", en->key, en->val);
-		en = en->next;
-	}
 }
 
 void	echo(char **args)
@@ -69,9 +54,4 @@ void	echo(char **args)
 	}
 	if (nwln)
 		write(1, "\n", 1);
-}
-
-void	unset(char *key, t_lst en)
-{
-	remove_lst(en, key);
 }

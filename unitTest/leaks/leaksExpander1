@@ -1,43 +1,43 @@
-==27216== Memcheck, a memory error detector
-==27216== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==27216== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==27216== Command: ./testExpander variabile\ $USER\ trovata
-==27216== 
-==27216== Invalid write of size 1
-==27216==    at 0x10970B: ft_strlcpy (in /home/frattah/42/cursus/shell/testExpander)
-==27216==    by 0x109B25: expand (in /home/frattah/42/cursus/shell/testExpander)
-==27216==    by 0x10A13B: main (in /home/frattah/42/cursus/shell/testExpander)
-==27216==  Address 0x4a59f17 is 0 bytes after a block of size 7 alloc'd
-==27216==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27216==    by 0x109AF0: expand (in /home/frattah/42/cursus/shell/testExpander)
-==27216==    by 0x10A13B: main (in /home/frattah/42/cursus/shell/testExpander)
-==27216== 
-==27216== Invalid read of size 1
-==27216==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27216==    by 0x48E4433: puts (ioputs.c:35)
-==27216==    by 0x10A167: main (in /home/frattah/42/cursus/shell/testExpander)
-==27216==  Address 0x4a59f17 is 0 bytes after a block of size 7 alloc'd
-==27216==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27216==    by 0x109AF0: expand (in /home/frattah/42/cursus/shell/testExpander)
-==27216==    by 0x10A13B: main (in /home/frattah/42/cursus/shell/testExpander)
-==27216== 
-==27216== Conditional jump or move depends on uninitialised value(s)
-==27216==    at 0x483C9F5: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27216==    by 0x109C53: free_lst (in /home/frattah/42/cursus/shell/testExpander)
-==27216==    by 0x10A1A2: main (in /home/frattah/42/cursus/shell/testExpander)
-==27216== 
-==27216== Conditional jump or move depends on uninitialised value(s)
-==27216==    at 0x483C9F5: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
-==27216==    by 0x109C63: free_lst (in /home/frattah/42/cursus/shell/testExpander)
-==27216==    by 0x10A1A2: main (in /home/frattah/42/cursus/shell/testExpander)
-==27216== 
-==27216== 
-==27216== HEAP SUMMARY:
-==27216==     in use at exit: 0 bytes in 0 blocks
-==27216==   total heap usage: 212 allocs, 212 frees, 9,287 bytes allocated
-==27216== 
-==27216== All heap blocks were freed -- no leaks are possible
-==27216== 
-==27216== Use --track-origins=yes to see where uninitialised values come from
-==27216== For lists of detected and suppressed errors, rerun with: -s
-==27216== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)
+==6797== Memcheck, a memory error detector
+==6797== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==6797== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==6797== Command: ./testExpander variabile\ $USER\ trovata
+==6797== 
+==6797== Invalid write of size 1
+==6797==    at 0x10978D: ft_strlcpy (in /home/frattah/42/cursus/shell/testExpander)
+==6797==    by 0x109BA7: expand (in /home/frattah/42/cursus/shell/testExpander)
+==6797==    by 0x10A13C: main (in /home/frattah/42/cursus/shell/testExpander)
+==6797==  Address 0x4a59f17 is 0 bytes after a block of size 7 alloc'd
+==6797==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6797==    by 0x109B72: expand (in /home/frattah/42/cursus/shell/testExpander)
+==6797==    by 0x10A13C: main (in /home/frattah/42/cursus/shell/testExpander)
+==6797== 
+==6797== Invalid read of size 1
+==6797==    at 0x483EF54: strlen (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6797==    by 0x48E4433: puts (ioputs.c:35)
+==6797==    by 0x10A168: main (in /home/frattah/42/cursus/shell/testExpander)
+==6797==  Address 0x4a59f17 is 0 bytes after a block of size 7 alloc'd
+==6797==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6797==    by 0x109B72: expand (in /home/frattah/42/cursus/shell/testExpander)
+==6797==    by 0x10A13C: main (in /home/frattah/42/cursus/shell/testExpander)
+==6797== 
+==6797== Conditional jump or move depends on uninitialised value(s)
+==6797==    at 0x483C9F5: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6797==    by 0x109CD5: free_lst (in /home/frattah/42/cursus/shell/testExpander)
+==6797==    by 0x10A1A3: main (in /home/frattah/42/cursus/shell/testExpander)
+==6797== 
+==6797== Conditional jump or move depends on uninitialised value(s)
+==6797==    at 0x483C9F5: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==6797==    by 0x109CE5: free_lst (in /home/frattah/42/cursus/shell/testExpander)
+==6797==    by 0x10A1A3: main (in /home/frattah/42/cursus/shell/testExpander)
+==6797== 
+==6797== 
+==6797== HEAP SUMMARY:
+==6797==     in use at exit: 0 bytes in 0 blocks
+==6797==   total heap usage: 212 allocs, 212 frees, 9,286 bytes allocated
+==6797== 
+==6797== All heap blocks were freed -- no leaks are possible
+==6797== 
+==6797== Use --track-origins=yes to see where uninitialised values come from
+==6797== For lists of detected and suppressed errors, rerun with: -s
+==6797== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 0 from 0)

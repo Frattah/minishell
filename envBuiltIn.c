@@ -20,3 +20,18 @@ void	export(char *entry, t_lst l)
 	put_lst(l, s, entry + first_occ(entry, '=') + 1);
 	free(s);
 }
+
+void	env(t_lst en)
+{
+	en = en->next;
+	while (en != NULL)
+	{
+		printf("%s=%s\n", en->key, en->val);
+		en = en->next;
+	}
+}
+
+void	unset(char *key, t_lst en)
+{
+	remove_lst(en, key);
+}
