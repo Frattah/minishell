@@ -56,6 +56,8 @@ char	*delimit_env(char *s);
 void	free_split(char **args);
 void	free_lst(t_lst l);
 
+// -------------------------------------------------------------
+
 void	cd(char *path, t_lst en);
 void	unset(char *key, t_lst en);
 void	env(t_lst en);
