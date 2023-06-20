@@ -1,99 +1,25 @@
-==28900== Memcheck, a memory error detector
-==28900== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==28900== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==28900== Command: ./testEnv
-==28900== 
-==28900== 
-==28900== HEAP SUMMARY:
-==28900==     in use at exit: 0 bytes in 0 blocks
-==28900==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
-==28900== 
-==28900== All heap blocks were freed -- no leaks are possible
-==28900== 
-==28900== For lists of detected and suppressed errors, rerun with: -s
-==28900== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==30098== Memcheck, a memory error detector
-==30098== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==30098== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==30098== Command: ./testEnv
-==30098== 
-==30098== 
-==30098== HEAP SUMMARY:
-==30098==     in use at exit: 0 bytes in 0 blocks
-==30098==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
-==30098== 
-==30098== All heap blocks were freed -- no leaks are possible
-==30098== 
-==30098== For lists of detected and suppressed errors, rerun with: -s
-==30098== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==30277== Memcheck, a memory error detector
-==30277== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==30277== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==30277== Command: ./testEnv
-==30277== 
-==30277== 
-==30277== HEAP SUMMARY:
-==30277==     in use at exit: 0 bytes in 0 blocks
-==30277==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
-==30277== 
-==30277== All heap blocks were freed -- no leaks are possible
-==30277== 
-==30277== For lists of detected and suppressed errors, rerun with: -s
-==30277== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-./test: riga 152: valgr: comando non trovato
-==31779== Memcheck, a memory error detector
-==31779== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==31779== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==31779== Command: ./testEnv
-==31779== 
-==31779== 
-==31779== HEAP SUMMARY:
-==31779==     in use at exit: 0 bytes in 0 blocks
-==31779==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
-==31779== 
-==31779== All heap blocks were freed -- no leaks are possible
-==31779== 
-==31779== For lists of detected and suppressed errors, rerun with: -s
-==31779== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==32297== Memcheck, a memory error detector
-==32297== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==32297== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==32297== Command: ./testEnv
-==32297== 
-==32297== 
-==32297== HEAP SUMMARY:
-==32297==     in use at exit: 0 bytes in 0 blocks
-==32297==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
-==32297== 
-==32297== All heap blocks were freed -- no leaks are possible
-==32297== 
-==32297== For lists of detected and suppressed errors, rerun with: -s
-==32297== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==32859== Memcheck, a memory error detector
-==32859== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==32859== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==32859== Command: ./testEnv
-==32859== 
-==32859== 
-==32859== HEAP SUMMARY:
-==32859==     in use at exit: 0 bytes in 0 blocks
-==32859==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
-==32859== 
-==32859== All heap blocks were freed -- no leaks are possible
-==32859== 
-==32859== For lists of detected and suppressed errors, rerun with: -s
-==32859== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==33066== Memcheck, a memory error detector
-==33066== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==33066== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==33066== Command: ./testEnv
-==33066== 
-==33066== 
-==33066== HEAP SUMMARY:
-==33066==     in use at exit: 0 bytes in 0 blocks
-==33066==   total heap usage: 1 allocs, 1 frees, 4,096 bytes allocated
-==33066== 
-==33066== All heap blocks were freed -- no leaks are possible
-==33066== 
-==33066== For lists of detected and suppressed errors, rerun with: -s
-==33066== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==27296== Memcheck, a memory error detector
+==27296== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27296== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==27296== Command: ./testEnv
+==27296== 
+==27296== Conditional jump or move depends on uninitialised value(s)
+==27296==    at 0x483C9F5: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27296==    by 0x109C53: free_lst (in /home/frattah/42/cursus/shell/testEnv)
+==27296==    by 0x10A135: main (in /home/frattah/42/cursus/shell/testEnv)
+==27296== 
+==27296== Conditional jump or move depends on uninitialised value(s)
+==27296==    at 0x483C9F5: free (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==27296==    by 0x109C63: free_lst (in /home/frattah/42/cursus/shell/testEnv)
+==27296==    by 0x10A135: main (in /home/frattah/42/cursus/shell/testEnv)
+==27296== 
+==27296== 
+==27296== HEAP SUMMARY:
+==27296==     in use at exit: 0 bytes in 0 blocks
+==27296==   total heap usage: 207 allocs, 207 frees, 9,224 bytes allocated
+==27296== 
+==27296== All heap blocks were freed -- no leaks are possible
+==27296== 
+==27296== Use --track-origins=yes to see where uninitialised values come from
+==27296== For lists of detected and suppressed errors, rerun with: -s
+==27296== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)

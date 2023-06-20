@@ -16,11 +16,18 @@ void	free_split(char **args)
 {
 	int	i;
 
-	i = 0;
-	while (args[i])
-	{
+	i = -1;
+	while (args[++i])
 		free(args[i]);
-		i++;
-	}
 	free(args);
+}
+
+void	free_lst(t_lst l)
+{
+	if (l->next != NULL)
+		free_lst(l->next);
+	free(l->key);
+	free(l->val);
+	free(l);
+	l = NULL;
 }

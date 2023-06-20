@@ -12,24 +12,24 @@
 
 #include "minishell.h"
 
-char	*find_env_var(char **envp, char *var)
+char	*find_env_var(t_lst l, char *key)
 {
 	size_t	ln;
 
-	ln = ft_strlen(var, '\0');
-	if (var == NULL)
+	ln = ft_strlen(key, '\0') + 1;
+	if (key == NULL)
 		return (NULL);
-	while (*envp)
+	l = l->next;
+	while (l != NULL)
 	{
-		if (!ft_strncmp(*envp, var, ln)
-			&& (*envp)[ln] == '=')
-			return ((*envp) + ln + 1);
-		envp++;
+		if (!ft_strncmp(l->key, key, ln))
+			return (l->val);
+		l = l->next;
 	}
 	return (NULL);
 }
 
-void	*expand(char **args, char **en)
+void	expand(char **args, t_lst l)
 {
 	char	*tmp;
 
@@ -37,7 +37,7 @@ void	*expand(char **args, char **en)
 	{
 		if ((*args)[0] == '$')
 		{
-			tmp = find_env_var(en, (*args) + 1);
+			tmp = find_env_var(l, (*args) + 1);
 			if (tmp != NULL)
 			{
 				free(*args);
@@ -56,7 +56,7 @@ char	*delimit_env(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && !((s[i] >= 9 && s[i] <= 13 || s[i] == ' ')))
+	while (s[i] && !(is_space(s[i]) || s[i] == ' '))
 		i++;
 	return (s + i);
 }

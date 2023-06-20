@@ -4,13 +4,16 @@ CYA='\033[0;36m'
 GRE='\033[0;32m'
 YEL='\033[1;33m'
 NC='\033[0m'
+FLAG='-Wall -Wextra -Werror'
+OBJ='envBuiltIn.c lst.c splitter.c str_utils.c expander.c free.c builtIn.c init.c'
+TEST_PATH='unitTest/test'
 cd ../..
 PREDIR=$PWD
 cd shell
 
 echo -e "\n${CYA}TEST NORMINETTE${NC}\n"
 
-norminette splitter.c str_utils.c expander.c builtIn.c free.c &> unitTest/norm/outNorm
+norminette $OBJ &> unitTest/norm/outNorm
 if [ $(grep -c "Error" unitTest/norm/outNorm) == 0 ];
 then
 	echo -en "${GRE}"
@@ -21,7 +24,7 @@ cat unitTest/norm/outNorm
 echo -en "${NC}"
 
 ##########################################################################################
-gcc unitTest/testSplitter.c splitter.c str_utils.c free.c -o testSplitter
+gcc $FLAG $OBJ $TEST_PATH/testSplitter.c -o testSplitter
 
 #-----------------------------------------------------------------------------------------
 
@@ -45,10 +48,9 @@ do
 	fi
 done
 rm -rf testSplitter
-
 ##########################################################################################
 
-gcc unitTest/testFindEnvVar.c expander.c str_utils.c splitter.c -o testFindEnvVar
+gcc $FLAG $OBJ $TEST_PATH/testFindEnvVar.c -o testFindEnvVar
 
 echo -e "$USER" > unitTest/riff/riffFindEnvVar1		      	      # REFERENCE CREATION
 echo -e "$PWD" > unitTest/riff/riffFindEnvVar2
@@ -79,7 +81,7 @@ rm -rf testFindEnvVar
 
 ##########################################################################################
 
-gcc unitTest/testExpander.c expander.c str_utils.c splitter.c free.c -o testExpander
+gcc $FLAG $OBJ $TEST_PATH/testExpander.c -o testExpander
 
 echo -e "variabile\n$USER\ntrovata" > unitTest/riff/riffExpander1     # REFERENCE CREATION
 echo -e "variabile\n$PWD\ntrovata" > unitTest/riff/riffExpander2
@@ -108,7 +110,7 @@ rm -rf testExpander
 
 ###########################################################################################
 
-gcc unitTest/testCd.c builtIn.c expander.c str_utils.c splitter.c -o testCd
+gcc $FLAG $OBJ $TEST_PATH/testCd.c -o testCd
 
 echo -e "$PWD\n$PREDIR" > unitTest/riff/riffCd1				#REFERENCE CREATION
 echo -e "$PWD\n$HOME" > unitTest/riff/riffCd2
@@ -146,13 +148,14 @@ rm -rf testCd
 
 ##########################################################################################
 
-gcc unitTest/testEnv.c builtIn.c expander.c str_utils.c splitter.c -o testEnv
+gcc $FLAG $OBJ $TEST_PATH/testEnv.c -o testEnv
 
 env > unitTest/riff/riffEnv1 && sed -i '$ d' unitTest/riff/riffEnv1   # REFERENCE CREATION
 
 #------------------------------------------------------------------------------------------
 
-./testEnv > unitTest/out/outEnv1 2>> unitTest/leaks/leaksEnv1 && sed -i '$ d' unitTest/out/outEnv1
+./testEnv > unitTest/out/outEnv1 && sed -i '$ d' unitTest/out/outEnv1
+valgrind ./testEnv > /tmp/tmpLeaks 2> unitTest/leaks/leaksEnv1
 
 #------------------------------------------------------------------------------------------
 
@@ -160,7 +163,8 @@ echo -e "\n${CYA}TEST ENV${NC}"
 for i in $(seq 1 1);
 do
 	echo -en "${YEL}#$i: ${NC}"
-	if [ "$(diff unitTest/out/outEnv$i unitTest/riff/riffEnv$i)" == "" ];
+	if [ "$(diff unitTest/out/outEnv$i unitTest/riff/riffEnv$i)" == "" ] \
+	&& [ $(grep -c "All heap blocks were freed" unitTest/leaks/leaksEnv$i) == 1 ];
 	then
         	echo -en "${GRE}\u2714${NC} "
 	else
@@ -171,7 +175,7 @@ rm -rf testEnv
 
 ##########################################################################################
 
-gcc unitTest/testPwd.c builtIn.c expander.c str_utils.c splitter.c -o testPwd
+gcc $FLAG $OBJ $TEST_PATH/testPwd.c -o testPwd
 
 pwd > unitTest/riff/riffPwd1					      # REFERENCE CREATION
 
@@ -197,7 +201,7 @@ rm -rf testPwd
 
 ###########################################################################################
 
-gcc unitTest/testEcho.c builtIn.c expander.c str_utils.c splitter.c -o testEcho
+gcc $FLAG $OBJ $TEST_PATH/testEcho.c -o testEcho
 
 echo "test di espansione $USER" > unitTest/riff/riffEcho2	       # REFERENCE CREATION
 echo "test di espansione $USEr" > unitTest/riff/riffEcho3
@@ -230,5 +234,59 @@ done
 rm -rf testEcho
 
 ###########################################################################################
+
+gcc $FLAG $OBJ $TEST_PATH/testUnset.c -o testUnset
+
+unset USER && env > unitTest/riff/riffUnset1					       # REFERENCE CREATION
+sed -i '$ d' unitTest/riff/riffUnset1 
+
+#------------------------------------------------------------------------------------------
+
+./testUnset "USER" > unitTest/out/outUnset1 && sed -i '$ d' unitTest/out/outUnset1
+valgrind ./testUnset "USER" > /tmp/tmpLeaks 2> unitTest/leaks/leaksUnset1
+
+#------------------------------------------------------------------------------------------
+
+echo -e "\n${CYA}TEST UNSET${NC}"
+for i in $(seq 1 1);
+do
+	echo -en "${YEL}#$i: ${NC}"
+	if [ "$(diff unitTest/out/outUnset$i unitTest/riff/riffUnset$i)" == "" ] \
+	&& [ $(grep -c "All heap blocks were freed" unitTest/leaks/leaksUnset$i) == 1 ];
+	then
+        	echo -en "${GRE}\u2714${NC} "
+	else
+        	echo -en "${RED}\u2716${NC} "
+	fi
+done
+rm -rf testUnset
+
+###########################################################################################
+
+gcc $FLAG $OBJ $TEST_PATH/testExport.c -o testExport
+
+export USER=nuovo && env > unitTest/riff/riffExport1					       # REFERENCE CREATION
+sed -i '$ d' unitTest/riff/riffExport1 
+
+#------------------------------------------------------------------------------------------
+
+./testExport "USER=nuovo" > unitTest/out/outExport1 && sed -i '$ d' unitTest/out/outExport1
+valgrind ./testExport "USER=nuovo" > /tmp/tmpLeaks 2> unitTest/leaks/leaksExport1
+
+#------------------------------------------------------------------------------------------
+
+echo -e "\n${CYA}TEST EXPORT${NC}"
+for i in $(seq 1 1);
+do
+	echo -en "${YEL}#$i: ${NC}"
+	if [ "$(diff unitTest/out/outExport$i unitTest/riff/riffExport$i)" == "" ] \
+	&& [ $(grep -c "All heap blocks were freed" unitTest/leaks/leaksExport$i) == 1 ];
+	then
+        	echo -en "${GRE}\u2714${NC} "
+	else
+        	echo -en "${RED}\u2716${NC} "
+	fi
+done
+rm -rf testExport
 
 echo -e "\n"

@@ -1,14 +1,14 @@
-==33889== Memcheck, a memory error detector
-==33889== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==33889== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
-==33889== Command: ./testSplitter Test\ semplice
-==33889== 
-==33889== 
-==33889== HEAP SUMMARY:
-==33889==     in use at exit: 0 bytes in 0 blocks
-==33889==   total heap usage: 4 allocs, 4 frees, 4,134 bytes allocated
-==33889== 
-==33889== All heap blocks were freed -- no leaks are possible
-==33889== 
-==33889== For lists of detected and suppressed errors, rerun with: -s
-==33889== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==27142== Memcheck, a memory error detector
+==27142== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==27142== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==27142== Command: ./testSplitter Test\ semplice
+==27142== 
+==27142== 
+==27142== HEAP SUMMARY:
+==27142==     in use at exit: 0 bytes in 0 blocks
+==27142==   total heap usage: 4 allocs, 4 frees, 4,134 bytes allocated
+==27142== 
+==27142== All heap blocks were freed -- no leaks are possible
+==27142== 
+==27142== For lists of detected and suppressed errors, rerun with: -s
+==27142== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

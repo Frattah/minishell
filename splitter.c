@@ -23,17 +23,16 @@ size_t	cntword(char const *s)
 		return (0);
 	while (s[i])
 	{
-		while (s[i] && !(s[i] >= 9 && s[i] <= 13 || s[i] == ' '))
+		while (s[i] && !is_space(s[i]))
 			i++;
-		while (s[i] && (s[i] >= 9 && s[i] <= 13 || s[i] == ' '))
+		while (s[i] && is_space(s[i]))
 		{
-			if (i != 0 && !(s[i - 1] >= 9 && s[i - 1] <= 13 || s[i - 1] == ' '))
+			if (i != 0 && !is_space(s[i - 1]))
 				w++;
 			i++;
 		}
 	}
-	if (s[i - 1] != '\0'
-		&& !(s[i - 1] >= 9 && s[i - 1] <= 13 || s[i - 1] == ' '))
+	if (s[i - 1] != '\0' && !is_space(s[i - 1]))
 		w++;
 	return (w);
 }
@@ -57,7 +56,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 
 char	*skpstr(char *s)
 {
-	while (*s && (*s >= 9 && *s <= 13 || *s == ' '))
+	while (*s && is_space(*s))
 		s++;
 	return (s);
 }
@@ -67,8 +66,7 @@ size_t	word_len(const char *s)
 	size_t	ln;
 
 	ln = 0;
-	while (s[ln]
-		&& !(s[ln] >= 9 && s[ln] <= 13 || s[ln] == ' '))
+	while (s[ln] && !is_space(s[ln]))
 		ln++;
 	return (ln);
 }

@@ -1,5 +1,8 @@
+envBuiltIn.c: OK!
+lst.c: OK!
 splitter.c: OK!
 str_utils.c: OK!
 expander.c: OK!
-builtIn.c: OK!
 free.c: OK!
+builtIn.c: OK!
+init.c: OK!
