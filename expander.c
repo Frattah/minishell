@@ -51,7 +51,6 @@ void	expand(char **args, t_lst l)
 	}
 }
 
-// CIao
 char	*delimit_env(char *s)
 {
 	int	i;

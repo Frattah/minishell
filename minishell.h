@@ -7,11 +7,17 @@
 
 typedef struct s_cmd
 {
-	int				fdin;
-	int				fdout;
 	char			**args;
 	char			*path;
+	char			*pipe;
+	struct s_cmd	*next;
 }	t_cmd;
+
+typedef t_cmd	*t_lst_cmd;
+
+t_lst_cmd	tokenize(char **args);
+int		is_pipe(char *s);
+void		print_lst_cmd(t_lst_cmd l);
 
 //-------------------------------------------------------------------------
 
@@ -48,10 +54,13 @@ char	**ft_split(char const *s);
 size_t	ft_strlen(const char *s, char c);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int	is_space(char c);
+void	create_str(char *src, char **dst);
 
 char	*find_env_var(t_lst en, char *key);
+char    *find_exec(char **src, char *cmd);
 void	expand(char **args, t_lst en);
 char	*delimit_env(char *s);
+char    *ft_strconc(char *s1, char *s2);
 
 void	free_split(char **args);
 void	free_lst(t_lst l);
@@ -59,12 +68,11 @@ void	free_lst(t_lst l);
 // ------------------------------------------------------------
 
 void	cd(char *path, t_lst en);
-void	unset(char *key, t_lst en);
-void	env(t_lst en);
 void	pwd(t_lst en);
 void	echo(char **args);
 
 void	export(char *entry, t_lst en);
+void	env(t_lst en);
+void	unset(char *key, t_lst en);
 
-void	main_loop(void);
 #endif

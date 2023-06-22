@@ -38,3 +38,12 @@ int	is_space(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);
 }
+
+void	create_str(char *src, char **dst)
+{
+	size_t	ln;
+
+	ln = ft_strlen(src, '\0') + 1;
+	*dst = (char *) malloc(sizeof(char) * ln);
+	ft_strlcpy(*dst, src, ln);
+}
