@@ -85,3 +85,31 @@ void	remove_lst(t_lst l, char *key)
 	}
 	return ;
 }
+
+char	**convert_lst(t_lst l)
+{
+	t_entry	*i;
+	int		j;
+	int		size;
+	char	**out;
+
+	i = l;
+	size = 0;
+	j = 0;
+	while (i != NULL)
+	{
+		size++;
+		i = i->next;
+	}
+	i = l;
+	out = (char **) malloc(sizeof(char *) * (size + 1));
+	out[size] = NULL;
+	while (i != NULL)
+	{
+		out[j] = (char *) malloc(sizeof(char) * (ft_strlen(i->val, '\0') + 1));
+		ft_strlcpy(out[j], i->val, ft_strlen(i->val, '\0') + 1);
+		j++;
+		i = i->next;
+	}
+	return (out);
+}

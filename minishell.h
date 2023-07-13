@@ -33,6 +33,7 @@ t_entry	*init_entry(char *key, char *val);
 t_entry *get_lst(t_lst l, char *key);
 void	put_lst(t_lst l, char *key, char *val);
 void	remove_lst(t_lst l, char *key);
+char	**convert(t_lst l);
 
 // ---------------------------------------------------------------------------
 
