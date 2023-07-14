@@ -47,6 +47,22 @@ t_lst_cmd	tokenize(char **args)
 	return (out);
 }
 
+
+void	redirect_cmd(t_lst_cmd l, t_lst en)
+{
+	int	ln;
+
+	while (l != NULL)
+	{
+		printf("sgf\n");
+		printf("%ld\n", ft_strlen(find_env_var(en, l->args[0]), '\0'));
+		ln = ft_strlen(find_env_var(en, l->args[0]), '\0');
+		l->path = (char *) malloc(sizeof(char) * (ln + 1));
+		ft_strlcpy(l->path, find_env_var(en, l->args[0]), (ln + 1));
+		l = l->next;
+	}
+}
+
 void	print_lst_cmd(t_lst_cmd l)
 {
 	int	i;
@@ -55,9 +71,11 @@ void	print_lst_cmd(t_lst_cmd l)
 	while (l != NULL)
 	{
 		i = -1;
+		printf("\nCMD_____________\nargs = ");
 		while (l->args[++i])
 			printf("%s ", l->args[i]);
-		printf("%s ", l->pipe);
+		printf("\npath = %s\n", l->path);
+		printf("pipe = %s\n", l->pipe);
 		l = l->next;
 	}
 	printf("\n");

@@ -5,21 +5,7 @@
 # include <unistd.h> // getcwd
 # include <readline/readline.h> // readline 
 
-typedef struct s_cmd
-{
-	char			**args;
-	char			*path;
-	char			*pipe;
-	struct s_cmd	*next;
-}	t_cmd;
-
-typedef t_cmd	*t_lst_cmd;
-
-t_lst_cmd	tokenize(char **args);
-int		is_pipe(char *s);
-void		print_lst_cmd(t_lst_cmd l);
-
-//-------------------------------------------------------------------------
+// ------------------------------------------------------------------
 
 typedef struct s_entry {
    char	*key;
@@ -35,7 +21,24 @@ void	put_lst(t_lst l, char *key, char *val);
 void	remove_lst(t_lst l, char *key);
 char	**convert(t_lst l);
 
-// ---------------------------------------------------------------------------
+// ------------------------------------------------------------------
+
+typedef struct s_cmd
+{
+	char			**args;
+	char			*path;
+	char			*pipe;
+	struct s_cmd	*next;
+}	t_cmd;
+
+typedef t_cmd	*t_lst_cmd;
+
+t_lst_cmd	tokenize(char **args);
+int		is_pipe(char *s);
+void		print_lst_cmd(t_lst_cmd l);
+void		redirect_cmd(t_lst_cmd l, t_lst en);
+
+//-------------------------------------------------------------------------
 
 typedef struct s_shell
 {
