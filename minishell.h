@@ -50,13 +50,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int	first_occ(char *str, char c);
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	cntword(char const *s);
-char	*skpstr(char *s);
-size_t	word_len(const char *s);
-char	**ft_split(char const *s);
+size_t	cntword(char const *s, char del);
+char	*skpstr(char *s, char del);
+size_t	word_len(const char *s, char del);
+char	**ft_split(char const *s, char del);
 
 size_t	ft_strlen(const char *s, char c);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int	is_delimiter(char del, char c);
 int	is_space(char c);
 void	create_str(char *src, char **dst);
 
@@ -64,6 +65,9 @@ char	*find_env_var(t_lst en, char *key);
 char    *find_exec(char **src, char *cmd);
 void	expand(char **args, t_lst en);
 char	*delimit_env(char *s);
+
+size_t  ft_strlcat(char *dst, const char *src, size_t dstsize);
+char    *ft_strdup(const char *s1);
 char    *ft_strconc(char *s1, char *s2);
 
 void	free_split(char **args);

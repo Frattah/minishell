@@ -47,20 +47,22 @@ t_lst_cmd	tokenize(char **args)
 	return (out);
 }
 
-
 void	redirect_cmd(t_lst_cmd l, t_lst en)
 {
-	int	ln;
+	int		ln;
+	char	**folders;
 
+	folders = ft_split(find_env_var(en, "PATH"), ':');
+	l = l->next;
 	while (l != NULL)
 	{
-		printf("sgf\n");
-		printf("%ld\n", ft_strlen(find_env_var(en, l->args[0]), '\0'));
-		ln = ft_strlen(find_env_var(en, l->args[0]), '\0');
+		printf("%s\n", l->args[0]);
+		ln = ft_strlen(find_exec(folders, l->args[0]), '\0');
 		l->path = (char *) malloc(sizeof(char) * (ln + 1));
-		ft_strlcpy(l->path, find_env_var(en, l->args[0]), (ln + 1));
+		ft_strlcpy(l->path, find_exec(folders, l->args[0]), (ln + 1));
 		l = l->next;
 	}
+	free_split(folders);
 }
 
 void	print_lst_cmd(t_lst_cmd l)

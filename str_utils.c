@@ -34,6 +34,13 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 }
 
+int	is_delimiter(char del, char c)
+{
+	if (del == ' ')
+		return ((c >= 9 && c <= 13) || c == 32);
+	return (del == c);
+}
+
 int	is_space(char c)
 {
 	return ((c >= 9 && c <= 13) || c == 32);

@@ -51,6 +51,20 @@ void	expand(char **args, t_lst l)
 	}
 }
 
+char	*find_exec(char **src, char *cmd)
+{
+	ft_strlcpy(*src, *src + 5, ft_strlen(*src, '\0'));
+	while (*src)
+	{
+		*src = ft_strconc(*src, ft_strdup("/"));
+		*src = ft_strconc(*src, ft_strdup(cmd));
+		if (!access(*src, 1))
+			return (*src);
+		src++;
+	}
+	return (NULL);
+}
+
 char	*delimit_env(char *s)
 {
 	int	i;
