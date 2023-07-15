@@ -14,12 +14,19 @@
 
 void	cd(char *path, t_lst l)
 {
+	char	buff[1000];
+
+	put_lst(l, "OLDPWD", getcwd(buff, 1000));
 	if (path == NULL || !ft_strncmp(path, "~", 2))
 		chdir(find_env_var(l, "HOME"));
 	else if (!ft_strncmp(path, "-", 2))
+	{
+		printf("%s\n", find_env_var(l, "OLDPWD"));
 		chdir(find_env_var(l, "OLDPWD"));
+	}
 	else
 		chdir(path);
+	put_lst(l, "PWD", getcwd(buff, 1000));
 }
 
 void	pwd(t_lst l)

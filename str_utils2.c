@@ -20,10 +20,9 @@ char	*ft_strconc(char *s1, char *s2)
 	nw = (char *) malloc(sizeof(char) * ln);
 	if (nw == NULL)
 		return (NULL);
+	nw[0] = '\0';
 	ft_strlcat(nw, s1, ft_strlen(s1, '\0') + 1);
 	ft_strlcat(nw, s2, ln);
-	free(s1);
-	free(s2);
 	return (nw);
 }
 
@@ -54,6 +53,8 @@ char	*ft_strdup(const char *s1)
 	char	*nw;
 	size_t	len;
 
+	if (s1 == NULL)
+		return (NULL);
 	len = ft_strlen(s1, '\0') + 1;
 	nw = (char *) malloc(sizeof(char) * len);
 	if (nw == NULL)

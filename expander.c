@@ -53,13 +53,23 @@ void	expand(char **args, t_lst l)
 
 char	*find_exec(char **src, char *cmd)
 {
+	char	*tmp1;
+	char	*tmp2;
+
+	if (cmd == NULL)
+		return (NULL);
 	ft_strlcpy(*src, *src + 5, ft_strlen(*src, '\0'));
 	while (*src)
 	{
-		*src = ft_strconc(*src, ft_strdup("/"));
-		*src = ft_strconc(*src, ft_strdup(cmd));
-		if (!access(*src, 1))
-			return (*src);
+		tmp1 = ft_strconc(*src, "/");
+		tmp2 = ft_strconc(tmp1, cmd);
+		if (!access(tmp2, 1))
+		{
+			free(tmp1);
+			return (tmp2);
+		}
+		free(tmp1);
+		free(tmp2);
 		src++;
 	}
 	return (NULL);
